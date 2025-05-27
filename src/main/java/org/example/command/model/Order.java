@@ -4,12 +4,31 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public class Order {
-    private final String ID;
+    private final String id;
     private List<Dish> dishes;
     private OrderStatus orderStatus;
     private LocalDateTime orderedTime;
 
-    public Order(String id) {
-        ID = id;
+    public Order(String id, List<Dish> dishes, OrderStatus orderStatus, LocalDateTime orderedTime) {
+        this.id = id;
+        this.dishes = dishes;
+        this.orderStatus = orderStatus;
+        this.orderedTime = orderedTime;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public List<Dish> getDishes() {
+        return dishes;
+    }
+
+    public OrderStatus getOrderStatus() {
+        return orderStatus;
+    }
+
+    public LocalDateTime getOrderedTime() {
+        return orderedTime;
     }
 }
