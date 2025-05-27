@@ -1,13 +1,14 @@
-package org.example.command.model;
+package org.example.query.dto;
 
-public class Dish {
-    private final String id;
+import java.time.LocalDateTime;
+
+public class DishDto {
+    private String id;
     private String name;
     private double price;
 
-
-    public Dish(String Id, String name, double price) {
-        this.id = Id;
+    public DishDto(String id, String name, double price) {
+        this.id = id;
         this.name = name;
         this.price = price;
     }

@@ -1,13 +1,12 @@
-package org.example.command.model;
+package org.example.query.model;
 
-public class Dish {
-    private final String id;
+public class DishView {
+    private String id;
     private String name;
     private double price;
 
-
-    public Dish(String Id, String name, double price) {
-        this.id = Id;
+    public DishView(String id, String name, double price) {
+        this.id = id;
         this.name = name;
         this.price = price;
     }

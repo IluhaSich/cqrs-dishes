@@ -18,7 +18,7 @@ public class AddDishCommandHandler implements CommandHandler<AddDishCommand>{
     @Override
     public void handle(AddDishCommand command) {
         Dish dish = dishRepository.findById(command.getDishId());
-        Order order = orderRepository.findById(command.getOrderId());
+        Order order     = orderRepository.findById(command.getOrderId());
         order.getDishes().add(dish);
         orderRepository.save(order);
     }
