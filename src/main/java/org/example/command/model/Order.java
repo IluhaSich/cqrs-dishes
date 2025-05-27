@@ -37,4 +37,13 @@ public class Order {
     public LocalDateTime getOrderedTime() {
         return orderedTime;
     }
+
+    public void changeOrderStatus(){
+        switch (this.getOrderStatus()){
+            case created -> this.orderStatus = OrderStatus.applied;
+            case applied -> this.orderStatus = OrderStatus.cooking;
+            case cooking -> this.orderStatus = OrderStatus.done;
+            case done -> System.out.println("Заказ уже готов");
+        }
+    }
 }
