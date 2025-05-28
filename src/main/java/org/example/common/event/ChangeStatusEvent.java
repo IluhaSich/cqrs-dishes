@@ -2,7 +2,7 @@ package org.example.common.event;
 
 import org.example.command.model.OrderStatus;
 
-public class ChangeStatusEvent {
+public class ChangeStatusEvent extends Event{
     private final String id;
     private final OrderStatus orderStatus;
 

@@ -2,7 +2,7 @@ package org.example.common.event;
 
 import java.time.LocalDateTime;
 
-public class AddDishEvent {
+public class AddDishEvent extends Event{
     private final String orderId;
     private final String dishId;
     private final String name;

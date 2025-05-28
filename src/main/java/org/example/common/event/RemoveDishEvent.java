@@ -1,6 +1,6 @@
 package org.example.common.event;
 
-public class RemoveDishEvent {
+public class RemoveDishEvent extends Event{
     private final String orderId;
     private final String dishId;
     private final String name;
