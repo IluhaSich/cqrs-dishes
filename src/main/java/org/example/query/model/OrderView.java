@@ -1,19 +1,18 @@
 package org.example.query.model;
 
-import org.example.command.model.Dish;
 import org.example.command.model.OrderStatus;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
 public class OrderView {
-    private final String id;
-    private final String clientName;
-    private List<Dish> dishes;
+    private String id;
+    private String clientName;
+    private List<DishView> dishes;
     private OrderStatus orderStatus;
     private LocalDateTime orderedTime;
 
-    public OrderView(String id, String clientName, List<Dish> dishes, OrderStatus orderStatus, LocalDateTime orderedTime) {
+    public OrderView(String id, String clientName, List<DishView> dishes, OrderStatus orderStatus, LocalDateTime orderedTime) {
         this.id = id;
         this.clientName = clientName;
         this.dishes = dishes;
@@ -29,7 +28,7 @@ public class OrderView {
         return clientName;
     }
 
-    public List<Dish> getDishes() {
+    public List<DishView> getDishes() {
         return dishes;
     }
 
@@ -40,4 +39,35 @@ public class OrderView {
     public LocalDateTime getOrderedTime() {
         return orderedTime;
     }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setClientName(String clientName) {
+        this.clientName = clientName;
+    }
+
+    public void setDishes(List<DishView> dishes) {
+        this.dishes = dishes;
+    }
+
+    public void setOrderStatus(OrderStatus orderStatus) {
+        this.orderStatus = orderStatus;
+    }
+
+    public void setOrderedTime(LocalDateTime orderedTime) {
+        this.orderedTime = orderedTime;
+    }
+
+    public double getTotalPrice() {
+        if (dishes == null || dishes.isEmpty()) {
+            return 0;
+        }
+
+        return dishes.stream()
+                .mapToDouble(DishView::getPrice)
+                .sum();
+    }
+
 }
