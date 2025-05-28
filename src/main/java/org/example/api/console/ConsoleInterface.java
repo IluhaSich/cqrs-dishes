@@ -17,14 +17,17 @@ public class ConsoleInterface {
 
     public void start() {
         while (true) {
-            System.out.println("Выберите действие:");
+            System.out.println("\n===== Систему управления заказами =====");
             System.out.println("1. Создать заказ");
-            System.out.println("2. Добавить блюдо в заказ");
-            System.out.println("3. Убрать блюдо из заказа");
-            System.out.println("4. Поменять статус заказа");
-            System.out.println("5. Показать все заказы");
-            System.out.println("6. Показать все блюда");
+            System.out.println("2. Создать блюдо");
+            System.out.println("3. Добавить блюдо в заказ");
+            System.out.println("4. Убрать блюдо из заказа");
+            System.out.println("5. Поменять статус заказа");
+            System.out.println("6. Показать все заказы");
+            System.out.println("7. Показать все блюда");
+            System.out.println("8. Показать статистику заказов");
             System.out.println("0. Выход");
+            System.out.println("Выберите действие:");
 
             String choice = scanner.nextLine();
 
@@ -33,19 +36,25 @@ public class ConsoleInterface {
                     createOrder();
                     break;
                 case "2":
-                    addDishToOrder();
+                    createDish();
                     break;
                 case "3":
                     addDishToOrder();
                     break;
                 case "4":
-                    changeOrderStatus();
+                    removeDishFromOrder();
                     break;
                 case "5":
-                    showAllOrders();
+                    changeOrderStatus();
                     break;
                 case "6":
+                    showAllOrders();
+                    break;
+                case "7":
                     showAllDishes();
+                    break;
+                case "8":
+                    getOrderStatistics();
                     break;
                 case "0":
                     return;
@@ -53,6 +62,20 @@ public class ConsoleInterface {
                     System.out.println("Неверный выбор");
             }
         }
+    }
+
+    private void getOrderStatistics() {
+        var stat = facade.getOrderStatistics();
+        System.out.println(stat);
+    }
+
+
+    private void createDish() {
+        System.out.print("Введите название блюда: ");
+        String dishName = scanner.nextLine();
+        System.out.print("Введите стоимость блюда: ");
+        Double price = Double.parseDouble(scanner.nextLine());
+        facade.createDish(dishName,price);
     }
 
     private void createOrder() {
@@ -71,11 +94,20 @@ public class ConsoleInterface {
         System.out.println("Блюдо добавлено в заказ");
     }
 
+    private void removeDishFromOrder() {
+        System.out.print("Введите ID заказа: ");
+        String orderId = scanner.nextLine();
+        System.out.print("Введите ID блюда: ");
+        String dishId = scanner.nextLine();
+        facade.removeDishFromOrder(orderId, dishId);
+        System.out.println("Блюдо удалено из заказа");
+    }
+
     private void changeOrderStatus() {
         System.out.print("Введите ID заказа: ");
         String orderId = scanner.nextLine();
         facade.changeOrderStatus(orderId);
-        System.out.println("Заказ завершен");
+        System.out.println("Статус заказа изменен");
     }
 
     private void showAllOrders() {

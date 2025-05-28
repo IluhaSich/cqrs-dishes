@@ -2,17 +2,12 @@ package org.example;
 
 import org.example.api.console.ConsoleInterface;
 import org.example.api.facade.RestaurantFacade;
-import org.example.command.command.AddDishCommand;
-import org.example.command.command.ChangeOrderStatusCommand;
-import org.example.command.command.CreateOrderCommand;
-import org.example.command.command.RemoveDishCommand;
+import org.example.command.command.*;
 import org.example.command.handler.*;
 import org.example.command.model.Dish;
 import org.example.command.repository.DishRepository;
 import org.example.command.repository.OrderRepository;
 import org.example.common.event.EventBus;
-import org.example.common.event.RemoveDishEvent;
-import org.example.query.model.DishView;
 import org.example.query.repository.DishViewRepository;
 import org.example.query.repository.OrderViewRepository;
 import org.example.query.service.DishQueryService;
@@ -36,6 +31,7 @@ public class RestaurantApplication {
         // Инициализация командной шины и обработчиков команд
         CommandBus commandBus = new CommandBus();
         commandBus.register(CreateOrderCommand.class, new CreateOrderCommandHandler(orderRepository));
+        commandBus.register(CreateDishCommand.class, new CreateDishCommandHandler(dishRepository));
         commandBus.register(AddDishCommand.class, new AddDishCommandHandler(orderRepository,dishRepository));
         commandBus.register(RemoveDishCommand.class, new RemoveDishCommandHandler(orderRepository,dishRepository));
         commandBus.register(ChangeOrderStatusCommand.class, new ChangeOrderStatusCommandHandler(orderRepository));

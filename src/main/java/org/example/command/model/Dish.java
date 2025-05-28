@@ -1,5 +1,8 @@
 package org.example.command.model;
 
+import org.example.common.event.DishCreatedEvent;
+import org.example.common.event.EventBus;
+
 public class Dish {
     private final String id;
     private String name;
@@ -10,6 +13,10 @@ public class Dish {
         this.id = Id;
         this.name = name;
         this.price = price;
+
+        EventBus.getInstance().publish(
+                new DishCreatedEvent(id,name,price)
+        );
     }
 
     public String getId() {

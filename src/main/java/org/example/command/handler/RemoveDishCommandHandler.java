@@ -18,9 +18,8 @@ public class RemoveDishCommandHandler implements CommandHandler<RemoveDishComman
 
     @Override
     public void handle(RemoveDishCommand command) {
-        Dish dish = dishRepository.findById(command.getDishId());
         Order order = orderRepository.findById(command.getOrderId());
-        order.getDishes().remove(dish);
+        order.removeDish(dishRepository.findById(command.getDishId()));
         orderRepository.save(order);
     }
 }

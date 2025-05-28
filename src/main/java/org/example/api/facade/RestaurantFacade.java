@@ -1,12 +1,10 @@
 package org.example.api.facade;
 
-import org.example.command.command.AddDishCommand;
-import org.example.command.command.ChangeOrderStatusCommand;
-import org.example.command.command.CreateOrderCommand;
-import org.example.command.command.RemoveDishCommand;
+import org.example.command.command.*;
 import org.example.command.handler.CommandBus;
 import org.example.query.dto.DishDto;
 import org.example.query.dto.OrderDto;
+import org.example.query.dto.OrdersStatisticsDto;
 import org.example.query.service.DishQueryService;
 import org.example.query.service.OrderQueryService;
 
@@ -27,6 +25,11 @@ public class RestaurantFacade {
 
     public void createOrder(String clientName) {
         CreateOrderCommand command = new CreateOrderCommand(clientName);
+        commandBus.dispatch(command);
+    }
+
+    public void createDish(String dishName, Double price) {
+        CreateDishCommand command = new CreateDishCommand(dishName,price);
         commandBus.dispatch(command);
     }
 
@@ -52,5 +55,8 @@ public class RestaurantFacade {
     public List<DishDto> getAllDishes() {
         return dishQueryService.getAllDishes();
     }
+
+
+    public OrdersStatisticsDto getOrderStatistics() { return orderQueryService.getOrdersStatistics();}
 }
 

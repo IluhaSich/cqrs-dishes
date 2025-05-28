@@ -1,5 +1,7 @@
 package org.example.command.model;
 
+import org.example.common.event.*;
+
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -16,6 +18,10 @@ public class Order {
         this.dishes = dishes;
         this.orderStatus = orderStatus;
         this.orderedTime = orderedTime;
+
+        EventBus.getInstance().publish(
+            new OrderCreatedEvent(id,clientName)
+        );
     }
 
     public String getId() {
@@ -45,5 +51,22 @@ public class Order {
             case cooking -> this.orderStatus = OrderStatus.done;
             case done -> System.out.println("Заказ уже готов");
         }
+
+        EventBus.getInstance().publish(
+            new ChangeStatusEvent(this.id,this.orderStatus)
+        );
+    }
+
+    public void addDish(Dish dish){
+        dishes.add(dish);
+        EventBus.getInstance().publish(
+                new AddDishEvent(this.id,dish.getId(),this.clientName)
+        );
+    }
+    public void removeDish(Dish dish){
+        dishes.remove(dish);
+        EventBus.getInstance().publish(
+                new RemoveDishEvent(this.id,dish.getId(),this.clientName)
+        );
     }
 }

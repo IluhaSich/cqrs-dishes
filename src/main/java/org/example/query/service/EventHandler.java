@@ -28,7 +28,9 @@ public class EventHandler implements EventBus.EventHandler{
             handleChangeStatus((ChangeStatusEvent) event);
         } else if (event instanceof AddDishEvent) {
             handleAddDish((AddDishEvent) event);
-        } else if (event instanceof RemoveDishEvent) {
+        } else if (event instanceof DishCreatedEvent) {
+            handleDishCreated((DishCreatedEvent) event);
+        }else if (event instanceof RemoveDishEvent) {
             handleRemoveDish((RemoveDishEvent) event);
         }
     }
@@ -42,8 +44,16 @@ public class EventHandler implements EventBus.EventHandler{
                 OrderStatus.created,
                 LocalDateTime.now()
         );
-
         orderViewRepository.save(orderView);
+    }
+
+    private void handleDishCreated(DishCreatedEvent event) {
+        DishView dishView = new DishView(
+                event.getId(),
+                event.getName(),
+                event.getPrice()
+        );
+        dishViewRepository.save(dishView);
     }
 
     private void handleAddDish(AddDishEvent event) {
@@ -69,5 +79,4 @@ public class EventHandler implements EventBus.EventHandler{
         order.setOrderStatus(event.getOrderStatus());
         orderViewRepository.save(order);
     }
-
 }

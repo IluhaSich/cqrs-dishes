@@ -5,6 +5,7 @@ import org.example.command.model.OrderStatus;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class OrderDto {
     private String id;
@@ -39,5 +40,16 @@ public class OrderDto {
 
     public LocalDateTime getOrderedTime() {
         return orderedTime;
+    }
+
+    @Override
+    public String toString() {
+        return "Заказ{" +
+                "id='" + id + '\'' +
+                ", clientName='" + clientName + '\'' +
+                ", dishes=" + (dishes != null ? dishes.stream().map(DishDto::toString).collect(Collectors.toList()) : null) +
+                ", orderStatus=" + orderStatus +
+                ", orderedTime=" + orderedTime +
+                '}';
     }
 }

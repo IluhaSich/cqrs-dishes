@@ -22,4 +22,12 @@ public class OrdersStatisticsDto {
     public double getLargestTotalPrice() {
         return largestTotalPrice;
     }
+
+    @Override
+    public String toString() {
+        return "\n==== Статистика по заказам ====\n" +
+                "Количество заказов: " + orderCount + "\n" +
+                "Средний чек: " + averageTotalPrice + "\n" +
+                "Наибольший чек: " + largestTotalPrice;
+    }
 }

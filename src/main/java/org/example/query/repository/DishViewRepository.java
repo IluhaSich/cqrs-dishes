@@ -12,6 +12,7 @@ public class DishViewRepository {
     }
 
     public DishView findById(String id) {
+        System.out.println(id);
         return Optional.ofNullable(dishes.get(id))
                 .orElseThrow(() -> new NoSuchElementException("Блюдо не найдено: " + id));
     }
